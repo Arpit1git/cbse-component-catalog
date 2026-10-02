@@ -90,15 +90,14 @@ const db = {
 
   async run(sql, params = []) {
     if (isPostgres) {
-      // If INSERT and doesn't have RETURNING, append RETURNING id
       let pgSql = sql;
       const isInsert = sql.trim().toUpperCase().startsWith('INSERT');
       if (isInsert && !sql.toUpperCase().includes('RETURNING')) {
-        pgSql = `${sql} RETURNING id`;
+        pgSql = `${sql} RETURNING *`;
       }
       pgSql = convertPlaceholders(pgSql);
       const res = await pgPool.query(pgSql, params);
-      const insertedId = res.rows && res.rows[0] ? res.rows[0].id : null;
+      const insertedId = res.rows && res.rows[0] ? (res.rows[0].id ?? null) : null;
       return {
         rowCount: res.rowCount,
         changes: res.rowCount,
