@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-paper-bg text-paper-text font-sans antialiased min-h-screen;
+    selection-background-color: #E3EEE8;
+  }
+}
+
+/* Custom scrollbar matching paper aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F6F3EC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DDD8CB;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B6F68;
+}
